@@ -19,13 +19,12 @@ import (
 
 	"github.com/xyzbit/minitaskx-contrib/discover/nacos"
 	"github.com/xyzbit/minitaskx-contrib/taskrepo/mysql"
-	example "github.com/xyzbit/minitaskx-example"
+	example "github.com/xyzbit/minitaskx-example/pkg"
 	"github.com/xyzbit/minitaskx/core/components/log"
 	"github.com/xyzbit/minitaskx/core/model"
 	"github.com/xyzbit/minitaskx/core/worker"
 	"github.com/xyzbit/minitaskx/core/worker/executor"
 	"github.com/xyzbit/minitaskx/core/worker/executor/goroutine"
-	"github.com/xyzbit/minitaskx/core/worker/infomer"
 	"github.com/xyzbit/minitaskx/pkg/util"
 	"go.uber.org/zap/zapcore"
 )
@@ -49,9 +48,9 @@ type bizLogic struct {
 
 func (b *bizLogic) Do(task *model.Task) (bool, error) {
 	b.index++
-	fmt.Println("====== worker", b.index, "exec task:", task.TaskKey)
-	time.Sleep(1 * time.Second)
-	if b.index > 5 {
+	fmt.Printf("[%s] logic run step(%d) \n", task.TaskKey, b.index)
+	time.Sleep(2 * time.Second)
+	if b.index >= 15 {
 		b.index = 0
 		return true, nil
 	}
@@ -78,13 +77,9 @@ func main() {
 	taskrepo := mysql.NewTaskRepo(example.NewGormDB())
 	logger := newLogger(ip)
 
-	// new worker
-	indexer := infomer.NewIndexer(&executor.Global{}, 5*time.Minute)
-	globalInfomer := infomer.New(indexer, taskrepo, logger)
-
 	worker := worker.NewWorker(
 		id, ip, port,
-		nacosDiscover, taskrepo, globalInfomer,
+		nacosDiscover, taskrepo,
 		worker.WithLogger(logger),
 	)
 

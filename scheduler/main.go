@@ -16,7 +16,7 @@ import (
 	"github.com/xyzbit/minitaskx-contrib/discover/nacos"
 	"github.com/xyzbit/minitaskx-contrib/election/mysql"
 	repo "github.com/xyzbit/minitaskx-contrib/taskrepo/mysql"
-	example "github.com/xyzbit/minitaskx-example"
+	example "github.com/xyzbit/minitaskx-example/pkg"
 	"github.com/xyzbit/minitaskx/core/scheduler"
 )
 
