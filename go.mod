@@ -4,8 +4,9 @@ go 1.23.0
 
 require (
 	github.com/gin-gonic/gin v1.10.0
-	github.com/xyzbit/minitaskx v0.0.0-20241219083401-8e93696c3d81
-	github.com/xyzbit/minitaskx-contrib v0.0.0-20241219022240-68848b70c2da
+	github.com/spf13/cobra v1.8.1
+	github.com/xyzbit/minitaskx v0.0.0-20241220103629-fee827aef570
+	github.com/xyzbit/minitaskx-contrib v0.0.0-20241220032954-9bdc4eb545a7
 	go.uber.org/zap v1.21.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.12
@@ -29,6 +30,7 @@ require (
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
@@ -46,6 +48,7 @@ require (
 	github.com/samber/lo v1.47.0 // indirect
 	github.com/shirou/gopsutil/v3 v3.24.5 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
+	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect

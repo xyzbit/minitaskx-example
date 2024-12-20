@@ -19,7 +19,7 @@ import (
 
 	"github.com/xyzbit/minitaskx-contrib/discover/nacos"
 	"github.com/xyzbit/minitaskx-contrib/taskrepo/mysql"
-	example "github.com/xyzbit/minitaskx-example"
+	example "github.com/xyzbit/minitaskx-example/pkg"
 	"github.com/xyzbit/minitaskx/core/components/log"
 	"github.com/xyzbit/minitaskx/core/model"
 	"github.com/xyzbit/minitaskx/core/worker"
@@ -49,9 +49,9 @@ type bizLogic struct {
 
 func (b *bizLogic) Do(task *model.Task) (bool, error) {
 	b.index++
-	fmt.Println("====== worker", b.index, "exec task:", task.TaskKey)
-	time.Sleep(1 * time.Second)
-	if b.index > 5 {
+	fmt.Printf("[%s] logic run step(%d) \n", task.TaskKey, b.index)
+	time.Sleep(2 * time.Second)
+	if b.index >= 15 {
 		b.index = 0
 		return true, nil
 	}
