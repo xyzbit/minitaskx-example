@@ -25,7 +25,6 @@ import (
 	"github.com/xyzbit/minitaskx/core/worker"
 	"github.com/xyzbit/minitaskx/core/worker/executor"
 	"github.com/xyzbit/minitaskx/core/worker/executor/goroutine"
-	"github.com/xyzbit/minitaskx/core/worker/infomer"
 	"github.com/xyzbit/minitaskx/pkg/util"
 	"go.uber.org/zap/zapcore"
 )
@@ -78,12 +77,9 @@ func main() {
 	taskrepo := mysql.NewTaskRepo(example.NewGormDB())
 	logger := newLogger(ip)
 
-	// new worker
-	indexer := infomer.NewIndexer(&executor.Global{}, 5*time.Minute)
 	worker := worker.NewWorker(
 		id, ip, port,
-		nacosDiscover,
-		infomer.New(indexer, taskrepo, logger),
+		nacosDiscover, taskrepo,
 		worker.WithLogger(logger),
 		worker.WithTriggerResync(1*time.Second),
 	)

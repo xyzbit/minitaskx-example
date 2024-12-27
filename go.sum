@@ -137,8 +137,8 @@ github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/ugorji/go/codec v1.2.12 h1:9LC83zGrHhuUA9l16C9AHXAqEV/2wBQ4nkvumAE65EE=
 github.com/ugorji/go/codec v1.2.12/go.mod h1:UNopzCgEMSXjBc6AOMqYvWC1ktqTAfzJZUZgYf6w6lg=
-github.com/xyzbit/minitaskx v0.0.0-20241224122244-83e7519cdc66 h1:ysLqfrj7CmwXGzlOw6hfMf2ZKI7FBtEtQCEgzmYvih0=
-github.com/xyzbit/minitaskx v0.0.0-20241224122244-83e7519cdc66/go.mod h1:Yb+SKjCbaHRxenX0buEeumS04xVZ1FoGDR2FhodxEHU=
+github.com/xyzbit/minitaskx v0.0.0-20241226150128-59e7c5f6058e h1:wJIyAWbH/jLvpIB64ssQtTeRNOeGP+CC6/vIBuo3S+k=
+github.com/xyzbit/minitaskx v0.0.0-20241226150128-59e7c5f6058e/go.mod h1:Yb+SKjCbaHRxenX0buEeumS04xVZ1FoGDR2FhodxEHU=
 github.com/xyzbit/minitaskx-contrib v0.0.0-20241224121847-bdb70149dffe h1:sRKTXDW2CI3HQ0kAZu/Qa7voTAIUATbR90Xof8OJCoc=
 github.com/xyzbit/minitaskx-contrib v0.0.0-20241224121847-bdb70149dffe/go.mod h1:EKt4DYUjGk5bhncO8v6GtLNyxSDWuCcbKkoW9CB8lrk=
 github.com/yuin/goldmark v1.3.5/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
