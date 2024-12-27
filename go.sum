@@ -137,10 +137,10 @@ github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/ugorji/go/codec v1.2.12 h1:9LC83zGrHhuUA9l16C9AHXAqEV/2wBQ4nkvumAE65EE=
 github.com/ugorji/go/codec v1.2.12/go.mod h1:UNopzCgEMSXjBc6AOMqYvWC1ktqTAfzJZUZgYf6w6lg=
-github.com/xyzbit/minitaskx v0.0.0-20241220103629-fee827aef570 h1:VPvvyB5hZ6URtZibnfb/RUPqqQOon2Y8ODDHZljVOgI=
-github.com/xyzbit/minitaskx v0.0.0-20241220103629-fee827aef570/go.mod h1:Yb+SKjCbaHRxenX0buEeumS04xVZ1FoGDR2FhodxEHU=
-github.com/xyzbit/minitaskx-contrib v0.0.0-20241220032954-9bdc4eb545a7 h1:E3qN+ujJ1vEk+RmQKYymt2LgEpub/teomUdbMJA7PLE=
-github.com/xyzbit/minitaskx-contrib v0.0.0-20241220032954-9bdc4eb545a7/go.mod h1:YhYgRdC/Y96e/DdNs5HA2ba+2hPXK9iHd7oAaNHTz0k=
+github.com/xyzbit/minitaskx v0.0.0-20241224122244-83e7519cdc66 h1:ysLqfrj7CmwXGzlOw6hfMf2ZKI7FBtEtQCEgzmYvih0=
+github.com/xyzbit/minitaskx v0.0.0-20241224122244-83e7519cdc66/go.mod h1:Yb+SKjCbaHRxenX0buEeumS04xVZ1FoGDR2FhodxEHU=
+github.com/xyzbit/minitaskx-contrib v0.0.0-20241224121847-bdb70149dffe h1:sRKTXDW2CI3HQ0kAZu/Qa7voTAIUATbR90Xof8OJCoc=
+github.com/xyzbit/minitaskx-contrib v0.0.0-20241224121847-bdb70149dffe/go.mod h1:EKt4DYUjGk5bhncO8v6GtLNyxSDWuCcbKkoW9CB8lrk=
 github.com/yuin/goldmark v1.3.5/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
 github.com/yusufpapurcu/wmi v1.2.4 h1:zFUKzehAFReQwLys1b/iSMl+JQGSCSjtVqQn9bBrPo0=
 github.com/yusufpapurcu/wmi v1.2.4/go.mod h1:SBZ9tNy3G9/m5Oi98Zks0QjeHVDvuK0qfxQmPyzfmi0=

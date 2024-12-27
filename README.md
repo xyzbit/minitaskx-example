@@ -16,7 +16,11 @@ make worker
 make scheduler
 ```   
 
-3. experience of running the method in the tests/*_test.go
+3. use case
+   - create task
+   - pause task
+   - resume task
+   - stop task
 
 4. clean up the resources
 make clean

@@ -80,12 +80,12 @@ func main() {
 
 	// new worker
 	indexer := infomer.NewIndexer(&executor.Global{}, 5*time.Minute)
-	globalInfomer := infomer.New(indexer, taskrepo, logger)
-
 	worker := worker.NewWorker(
 		id, ip, port,
-		nacosDiscover, taskrepo, globalInfomer,
+		nacosDiscover,
+		infomer.New(indexer, taskrepo, logger),
 		worker.WithLogger(logger),
+		worker.WithTriggerResync(1*time.Second),
 	)
 
 	quit := make(chan os.Signal, 1)

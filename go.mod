@@ -5,8 +5,8 @@ go 1.23.0
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/spf13/cobra v1.8.1
-	github.com/xyzbit/minitaskx v0.0.0-20241220103629-fee827aef570
-	github.com/xyzbit/minitaskx-contrib v0.0.0-20241220032954-9bdc4eb545a7
+	github.com/xyzbit/minitaskx v0.0.0-20241224122244-83e7519cdc66
+	github.com/xyzbit/minitaskx-contrib v0.0.0-20241224121847-bdb70149dffe
 	go.uber.org/zap v1.21.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.12
