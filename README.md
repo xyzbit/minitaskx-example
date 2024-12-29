@@ -14,9 +14,15 @@ make worker
 
 # run scheduler to schedule task
 make scheduler
-```   
+```
 
-3. use case
+3. use command-line tool
+```
+make build
+
+./minitaskx -h
+```
+your can do:
    - create task
    - pause task
    - resume task
