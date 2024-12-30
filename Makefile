@@ -17,6 +17,6 @@ worker:
 scheduler:
 	go build -o minischeduler ${PROJECT_PATH}/scheduler/*.go && ./minischeduler -port 8080
 
-.PHONY: build
-build:
-	go build -o minitaskx -ldflags "-s -w -X main.Version=$(git show -s --format=%h) -X main.Build=$(date -u +%FT%TZ)" main.go
+.PHONY: ctl
+ctl:
+	go build -o minictl -ldflags "-s -w -X main.Version=$(git show -s --format=%h) -X main.Build=$(date -u +%FT%TZ)" main.go

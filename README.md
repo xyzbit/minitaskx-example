@@ -16,7 +16,13 @@ make worker
 make scheduler
 ```   
 
-3. use case
+3. use with command line tools
+```
+make ctl
+
+./minictl -h
+```
+your can use minictl to:
    - create task
    - pause task
    - resume task
