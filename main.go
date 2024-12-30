@@ -119,7 +119,8 @@ func createTask(bizID string) error {
 	defer resp.Body.Close()
 
 	if status := resp.StatusCode; status != http.StatusOK {
-		return fmt.Errorf("got %d want %d", status, http.StatusOK)
+		body, _ := io.ReadAll(resp.Body)
+		return fmt.Errorf("got %d want %d, resp: %s", status, http.StatusOK, string(body))
 	}
 
 	return nil
@@ -139,7 +140,8 @@ func operateTask(bizID string, status model.TaskStatus) error {
 	defer resp.Body.Close()
 
 	if status := resp.StatusCode; status != http.StatusOK {
-		return fmt.Errorf("got %d want %d", status, http.StatusOK)
+		body, _ := io.ReadAll(resp.Body)
+		return fmt.Errorf("got %d want %d, resp: %s", status, http.StatusOK, string(body))
 	}
 	return nil
 }

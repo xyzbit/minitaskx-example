@@ -14,7 +14,11 @@ make worker
 
 # run scheduler to schedule task
 make scheduler
-```   
+```
+
+3. use command-line tool
+```
+make build
 
 3. use with command line tools
 ```
