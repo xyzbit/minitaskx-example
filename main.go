@@ -29,7 +29,7 @@ var createTaskCmd = &cobra.Command{
 	Use:   "create",
 	Short: "Run a new task",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		bizID := fmt.Sprintf("test_flow_run_%d", rand.Int31())
+		bizID := fmt.Sprintf("test_flow_run_go_%d", rand.Int31())
 		if err := createTask(bizID); err != nil {
 			return err
 		}
@@ -37,6 +37,50 @@ var createTaskCmd = &cobra.Command{
 		return nil
 	},
 }
+
+var createDockerTaskCmd = &cobra.Command{
+	Use:   "create-docker",
+	Short: "Run a new docker task",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		bizID := fmt.Sprintf("test_flow_run_docker_%d", rand.Int31())
+		if err := createDockerTask(bizID); err != nil {
+			return err
+		}
+		fmt.Println("create task success, will be finshed after 30s, bizID: ", bizID)
+		return nil
+	},
+}
+
+var createK8sJobTaskCmd = &cobra.Command{
+	Use:   "create-k8sjob",
+	Short: "Run a new k8sjob task",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		bizID := fmt.Sprintf("test_flow_run_k8sjob_%d", rand.Int31())
+		if err := createK8sJobTask(bizID); err != nil {
+			return err
+		}
+		fmt.Println("create task success, will be finshed after 30s, bizID: ", bizID)
+		return nil
+	},
+}
+
+var (
+	createCount    int
+	createTaskNCmd = &cobra.Command{
+		Use:   "createn",
+		Short: "Run many new task",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			for i := 0; i < createCount; i++ {
+				bizID := fmt.Sprintf("test_flow_run_%d", rand.Int31())
+				if err := createTask(bizID); err != nil {
+					return err
+				}
+				fmt.Printf("create task %d success, will be finished after 30s, bizID: %s\n", i+1, bizID)
+			}
+			return nil
+		},
+	}
+)
 
 var watchTaskCmd = &cobra.Command{
 	Use:   "watch",
@@ -88,6 +132,10 @@ var stopTaskCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(createTaskCmd)
+	createTaskNCmd.Flags().IntVarP(&createCount, "count", "n", 1, "number of tasks to create")
+	rootCmd.AddCommand(createTaskNCmd)
+	rootCmd.AddCommand(createDockerTaskCmd)
+	rootCmd.AddCommand(createK8sJobTaskCmd)
 	rootCmd.AddCommand(pauseTaskCmd)
 	rootCmd.AddCommand(resumeTaskCmd)
 	rootCmd.AddCommand(stopTaskCmd)
@@ -112,7 +160,48 @@ func createTask(bizID string) error {
 		}
 	`, bizID)
 	req.WriteString(d)
-	resp, err := http.Post(host+"api/v1/scheduler/tasks/create", "application/json", &req)
+	return sendCreateRequest(&req)
+}
+
+func createDockerTask(bizID string) error {
+	payload := `
+	{
+		"image": "busybox:latest",
+		"cmd": ["sh", "-c", "for i in $(seq 1 30); do echo \"hello $i\"; sleep 1; done"]
+	}
+	`
+
+	fmt.Printf("payload: %s\n bizID: %s", payload, bizID)
+	task := &model.Task{
+		BizID:   bizID,
+		BizType: "test",
+		Type:    "docker",
+		Payload: payload,
+	}
+	req, _ := json.Marshal(task)
+	return sendCreateRequest(bytes.NewBuffer(req))
+}
+
+func createK8sJobTask(bizID string) error {
+	payload := fmt.Sprintf(`
+	{
+	    "name": "%s",
+		"image": "busybox:latest",
+		"command": ["sh", "-c", "for i in $(seq 1 30); do echo \"hello $i\"; sleep 1; done"]
+	}`, bizID)
+
+	task := &model.Task{
+		BizID:   bizID,
+		BizType: "test",
+		Type:    "k8sjob",
+		Payload: payload,
+	}
+	req, _ := json.Marshal(task)
+	return sendCreateRequest(bytes.NewBuffer(req))
+}
+
+func sendCreateRequest(body io.Reader) error {
+	resp, err := http.Post(host+"api/v1/scheduler/tasks/create", "application/json", body)
 	if err != nil {
 		return err
 	}

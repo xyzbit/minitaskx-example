@@ -4,6 +4,8 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"syscall"
@@ -11,14 +13,17 @@ import (
 
 	"github.com/xyzbit/minitaskx-contrib/discover/nacos"
 	"github.com/xyzbit/minitaskx-contrib/taskrepo/mysql"
-	example "github.com/xyzbit/minitaskx-example/pkg"
 	"github.com/xyzbit/minitaskx/core/components/log"
 	"github.com/xyzbit/minitaskx/core/model"
 	"github.com/xyzbit/minitaskx/core/worker"
 	"github.com/xyzbit/minitaskx/core/worker/executor"
+	"github.com/xyzbit/minitaskx/core/worker/executor/docker"
 	"github.com/xyzbit/minitaskx/core/worker/executor/goroutine"
+	"github.com/xyzbit/minitaskx/core/worker/executor/k8sjob"
 	"github.com/xyzbit/minitaskx/pkg/util"
 	"go.uber.org/zap/zapcore"
+
+	example "github.com/xyzbit/minitaskx-example/pkg"
 )
 
 var (
@@ -28,6 +33,8 @@ var (
 
 func init() {
 	executor.RegisterExecutor("goroutine", goroutine.NewExecutor(newBizLogicFunction))
+	executor.RegisterExecutor("docker", docker.NewExecutor())
+	executor.RegisterExecutor("k8sjob", k8sjob.NewExecutor())
 
 	flag.StringVar(&id, "id", "", "worker id, if empty, will be auto set to discover instance id")
 	flag.IntVar(&port, "port", 0, "worker port")
@@ -73,6 +80,14 @@ func main() {
 	taskrepo := mysql.NewTaskRepo(example.NewGormDB())
 	logger := newLogger(ip)
 
+	// run http server to export metrics
+	go func() {
+		if err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil); err != nil {
+			log.Error("HTTP server error: %v", err)
+		}
+	}()
+
+	// run worker
 	worker := worker.NewWorker(
 		id, ip, port,
 		nacosDiscover, taskrepo,

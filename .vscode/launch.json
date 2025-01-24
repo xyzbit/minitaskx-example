@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug Worker",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/worker",
+            "args": ["-port", "9090", "-id", "worker-1"],
+            "env": {
+                "DOCKER_API_VERSION": "1.41"
+            }
+        },
+        {
             "name": "Attach to Process",
             "type": "go",
             "request": "attach",
