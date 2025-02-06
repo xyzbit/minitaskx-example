@@ -11,7 +11,7 @@ clean:
 
 .PHONY: worker
 worker:
-	go build -o miniworker ${PROJECT_PATH}/worker/*.go && ./miniworker -port 9090 -id=worker-1
+	go build -o miniworker ${PROJECT_PATH}/worker/*.go && DOCKER_API_VERSION=1.41 ./miniworker -port 9090 -id=worker-1
 
 .PHONY: scheduler
 scheduler:

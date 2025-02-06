@@ -19,7 +19,7 @@ import (
 	"github.com/xyzbit/minitaskx/core/worker/executor"
 	"github.com/xyzbit/minitaskx/core/worker/executor/docker"
 	"github.com/xyzbit/minitaskx/core/worker/executor/goroutine"
-	"github.com/xyzbit/minitaskx/core/worker/executor/k8sjob"
+	// "github.com/xyzbit/minitaskx/core/worker/executor/k8sjob"
 	"github.com/xyzbit/minitaskx/pkg/util"
 	"go.uber.org/zap/zapcore"
 
@@ -34,7 +34,7 @@ var (
 func init() {
 	executor.RegisterExecutor("goroutine", goroutine.NewExecutor(newBizLogicFunction))
 	executor.RegisterExecutor("docker", docker.NewExecutor())
-	executor.RegisterExecutor("k8sjob", k8sjob.NewExecutor())
+	// executor.RegisterExecutor("k8sjob", k8sjob.NewExecutor())
 
 	flag.StringVar(&id, "id", "", "worker id, if empty, will be auto set to discover instance id")
 	flag.IntVar(&port, "port", 0, "worker port")
@@ -48,7 +48,7 @@ type bizLogic struct {
 func newBizLogicFunction() goroutine.BizLogic {
 	logic := &bizLogic{}
 	// return logic.Do
-	return func(task *model.Task) (bool, error) {
+	return func(task *model.TaskExecParam) (bool, error) {
 		logic.index++
 		fmt.Printf("[%s] logic run step(%d) \n", task.TaskKey, logic.index)
 		time.Sleep(2 * time.Second)
